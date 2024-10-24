@@ -134,7 +134,7 @@
 				<c:if test = "${param.menu == 'ok'}">
 				
 				<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-					<a href="/product/updateProductView.do?prodNo=${product.prodNo}&menu=manage">확인</a>
+					<a href="/product/updateProduct?prodNo=${product.prodNo}&menu=manage">확인</a>
 				</td>
 				
 				</c:if>

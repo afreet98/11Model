@@ -76,6 +76,7 @@ public class ProductController {
 	    }
 		
 		productService.addProduct(product);
+		Thread.sleep(2000);
 		
 		return "redirect:/product/addProductView.jsp";
 	}
@@ -110,13 +111,22 @@ public class ProductController {
 	
 	//@RequestMapping("/updateProduct.do")
 	@RequestMapping( value="updateProduct", method=RequestMethod.POST )
-	public String updateProduct( @ModelAttribute("product") Product product , @RequestParam("prodNo") int prodNo , Model model , HttpSession session) throws Exception{
+	public String updateProduct( @ModelAttribute("product") Product product , @RequestParam("prodNo") int prodNo , Model model , HttpSession session , @RequestParam("file") MultipartFile file) throws Exception{
 
 		System.out.println("/product/updateProduct : POST");
 		//Business Logic
+		
+		if (!file.isEmpty()) {
+	        String fileName = file.getOriginalFilename();
+	        File destinationFile = new File("C:/Users/afree/git/11Model/11.Model2MVCShop/src/main/webapp/images/" + fileName);
+	        file.transferTo(destinationFile);
+	        product.setFileName(fileName);
+	    }
+		
 		productService.updateProduct(product);
 		
 		System.out.println(prodNo);
+		Thread.sleep(500);
 		
 		return "redirect:/product/getProduct?prodNo="+prodNo+"&menu=ok";
 	}

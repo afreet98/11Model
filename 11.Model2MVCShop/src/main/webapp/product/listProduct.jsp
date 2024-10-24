@@ -109,7 +109,6 @@ $(function() {
 														+"상품 상세정보 : "+JSONData.prodDetail+"<br/>"
 														+"제 조 일 자 : "+JSONData.manuDate+"<br/>"
 														+"가     격 : "+JSONData.price+"<br/>"
-														+"등 록 일 자 : "+JSONData.regDate+"<br/>"
 														+"</h6>";
 						
 							$("h6").remove();
