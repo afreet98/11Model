@@ -2,6 +2,8 @@ package com.model2.mvc.service.product;
 
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
 

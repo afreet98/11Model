@@ -48,6 +48,12 @@
 		      <!-- Servlet Meta-data / Spring Meta-data 위치 분리함 -->
 		    </init-param>
 		    
+		    <multipart-config>
+		    	<max-file-size>10000000</max-file-size>
+		    	<max-request-size>10000000</max-request-size>
+				<file-size-threshold>1000000</file-size-threshold>		    
+		    </multipart-config>
+		    
 		    <load-on-startup>1</load-on-startup>
   </servlet>
   

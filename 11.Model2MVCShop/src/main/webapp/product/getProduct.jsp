@@ -1,6 +1,5 @@
 <%@ page contentType="text/html; charset=euc-kr"%>
 
-<%@ page import="com.model2.mvc.service.domain.Product" %>
  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
@@ -78,7 +77,7 @@
 		</td>
 		<td bgcolor="D6D6D6" width="1"></td>
 		<td class="ct_write01">
-			<img src = "/images/uploadFiles/../../images/empty.GIF"/>
+			<img src = "/images/${product.fileName}" width="200" height="200"/>
 		</td>
 	</tr>
 	<tr>

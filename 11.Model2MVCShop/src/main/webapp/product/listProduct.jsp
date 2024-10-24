@@ -88,7 +88,7 @@ $(function() {
 
 $(function() {
 	 
-	$(  "td:nth-child(6) > i" ).on("click" , function() {
+	$(  ".product-image" ).on("click" , function() {
 
 		var prodNo = $(this).next().val();
 		
@@ -102,11 +102,10 @@ $(function() {
 							"Content-Type" : "application/json"
 						},
 						success : function(JSONData , status) {
-							
+
 							var displayValue = "<h6>"
 														+"상 품 번 호 : "+JSONData.prodNo+"<br/>"
 														+"상  품  명 : "+JSONData.prodName+"<br/>"
-														+"상 품 이미지 : 없음 <br/>"
 														+"상품 상세정보 : "+JSONData.prodDetail+"<br/>"
 														+"제 조 일 자 : "+JSONData.manuDate+"<br/>"
 														+"가     격 : "+JSONData.price+"<br/>"
@@ -207,9 +206,10 @@ $(function() {
 			<td align="left">${product.price}</td>
 			<td align="left">${product.regDate}</td>	
 			<td align="left">판매중</td>	
-			<td align="left" data-prod-no="${product.prodNo}">
-			  	<i class="glyphicon glyphicon-ok" id= "${product.prodNo}"></i>
+			<td align="left" data-prod-no="${product.prodNo}" >
+			  	<img src= "/images/${product.fileName}" width="100" height="100" class="product-image">
 			  	<input type="hidden" value="${product.prodNo}">
+			  	<p id="${product.prodNo}"></p>
 			  </td>	
 		</tr>
 	</c:forEach>

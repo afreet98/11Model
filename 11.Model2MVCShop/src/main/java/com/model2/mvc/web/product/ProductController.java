@@ -63,10 +63,18 @@ public class ProductController {
 	
 	//@RequestMapping("/addProduct.do")
 	@RequestMapping( value="addProduct", method=RequestMethod.POST )
-	public String addProduct( @ModelAttribute("product") Product product) throws Exception {
+	public String addProduct( @ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) throws Exception {
  
 		System.out.println("/product/addProduct : POST");
 		//Business Logic
+		
+		if (!file.isEmpty()) {
+	        String fileName = file.getOriginalFilename();
+	        File destinationFile = new File("C:/Users/afree/git/11Model/11.Model2MVCShop/src/main/webapp/images/" + fileName);
+	        file.transferTo(destinationFile);
+	        product.setFileName(fileName);
+	    }
+		
 		productService.addProduct(product);
 		
 		return "redirect:/product/addProductView.jsp";
