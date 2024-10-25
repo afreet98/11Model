@@ -3,6 +3,7 @@ package com.model2.mvc.web.product;
 import java.io.File;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,8 +13,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +49,16 @@ public class ProductController {
 	//@Value("#{commonProperties['pageSize'] ?: 2}")
 	int pageSize;
 	
+	@Value("#{commonProperties['path']}")
+	//@Value("#{commonProperties['pageSize'] ?: 2}")
+	String path;
+	
+	
+	@Autowired
+	ServletContext servletContext;
+	
+	
+	
 	
 	//@RequestMapping("/addProductView.do")
 	//public String addProductView() throws Exception {
@@ -66,17 +75,19 @@ public class ProductController {
 	public String addProduct( @ModelAttribute("product") Product product, @RequestParam("file") MultipartFile file) throws Exception {
  
 		System.out.println("/product/addProduct : POST");
+		System.out.println(path);
 		//Business Logic
-		
 		if (!file.isEmpty()) {
 	        String fileName = file.getOriginalFilename();
-	        File destinationFile = new File("C:/Users/afree/git/11Model/11.Model2MVCShop/src/main/webapp/images/" + fileName);
+	        String pathroot =servletContext.getRealPath(path);
+	        System.out.println(pathroot);
+	        File destinationFile = new File(pathroot+fileName);
 	        file.transferTo(destinationFile);
 	        product.setFileName(fileName);
 	    }
 		
 		productService.addProduct(product);
-		Thread.sleep(2000);
+		Thread.sleep(500);
 		
 		return "redirect:/product/addProductView.jsp";
 	}
@@ -116,13 +127,16 @@ public class ProductController {
 		System.out.println("/product/updateProduct : POST");
 		//Business Logic
 		
+		
 		if (!file.isEmpty()) {
 	        String fileName = file.getOriginalFilename();
-	        File destinationFile = new File("C:/Users/afree/git/11Model/11.Model2MVCShop/src/main/webapp/images/" + fileName);
+	        
+	        String pathroot= servletContext.getRealPath(path);
+	        System.out.println(path);
+	        File destinationFile = new File(pathroot+fileName);
 	        file.transferTo(destinationFile);
 	        product.setFileName(fileName);
 	    }
-		
 		productService.updateProduct(product);
 		
 		System.out.println(prodNo);
